@@ -75,7 +75,7 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
           <Sheet>
             <SheetTrigger
               render={
-                <Button variant="ghost" size="icon" className="-mr-2 rounded-full" aria-label="Open navigation" />
+                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open navigation" />
               }
             >
               <Menu size={22} strokeWidth={1.8} />
