@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-
 interface SiteNavigationProps {
   activePage: "home" | "solutions" | "contact";
 }
@@ -17,50 +14,37 @@ const navigationItems = [
 ] as const;
 
 export function SiteNavigation({ activePage }: SiteNavigationProps) {
-  function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
-    if (activePage !== "home") return;
+  function handleScroll(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
     event.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.history.replaceState(null, "", `#${id}`);
   }
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 h-24 border-b border-border bg-background/95 backdrop-blur-[2px] lg:h-14">
-        <div className="flex h-full w-full flex-col justify-center gap-1 px-4 sm:px-7 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-          <div className="flex items-center justify-between gap-2 lg:justify-start">
-            <Link
-              href="/"
-              className={cn(
-                "shrink-0 text-[18px] leading-none tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55 lg:text-[20px]",
-                activePage === "home" && "font-bold",
-              )}
-            >
+      <header className="fixed top-0 left-0 z-50 flex h-24 w-full items-center border-b border-gray-100 bg-white/80 px-6 py-4 backdrop-blur-md lg:h-14 lg:justify-between">
+        <div className="flex w-full min-w-0 flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+          {activePage === "home" ? (
+            <span className="shrink-0 text-lg leading-none font-bold tracking-[-0.02em]">Vivian Wang</span>
+          ) : (
+            <a href="/" className="shrink-0 text-lg leading-none font-bold tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" aria-label="Vivian Wang — return to profile">
               Vivian Wang
-            </Link>
-            {activePage !== "home" ? (
-              <Link href="/" className="portfolio-home-spot" aria-label="Return to the profile page">
-                <span aria-hidden="true" />
-              </Link>
-            ) : (
-              <span className="portfolio-home-spot portfolio-home-spot-static" aria-hidden="true">
-                <span />
-              </span>
-            )}
-          </div>
+            </a>
+          )}
 
-          <nav className="grid w-full grid-cols-3 gap-x-2 gap-y-1 text-center text-[13px] leading-none lg:flex lg:w-auto lg:items-center lg:gap-4 lg:text-[14px] xl:gap-7 xl:text-[16px]" aria-label="Primary navigation">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.id}
-                href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
-                onClick={(event) => scrollToSection(event, item.id)}
-                className="py-1 transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {activePage === "home" && (
+            <nav className="grid w-full grid-cols-3 gap-x-3 gap-y-2 text-center text-xs leading-none sm:grid-cols-6 sm:text-sm lg:w-auto lg:shrink-0 lg:flex lg:items-center lg:gap-6" aria-label="Primary navigation">
+              {navigationItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(event) => handleScroll(event, item.id)}
+                  className="whitespace-nowrap py-1 transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          )}
         </div>
       </header>
       <div className="h-10 lg:hidden" aria-hidden="true" />
