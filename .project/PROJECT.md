@@ -1,7 +1,7 @@
 <!-- OWNER: Build (with the user) · READERS: every agent · READ THIS FIRST -->
 # Personal Portfolio
 
-**One-liner:** A three-page portfolio for Vivian Wang (Wang Hanzhi) that presents finance cases, data-informed research, project execution, and contact details through a digital-paper visual system.
+**One-liner:** A resume-style portfolio for Vivian Wang with a sectioned homepage for education, experience, research, skills, and contact, alongside existing work and contact routes.
 
 ## Goal
 Help internship reviewers, competition collaborators, and project partners quickly understand Wang Hanzhi’s analytical range, strongest evidence, and ways to get in touch.
@@ -15,6 +15,8 @@ Prospective clients, collaborators, and people evaluating the owner's work and c
 - Repo: —
 
 ## What exists today
+- A resume-style homepage with six anchored sections, sticky navigation, entry and scroll-reveal motion, and the owner's supplied English copy
+- A resume download backed by the supplied CV, plus the existing email and LinkedIn links
 - Three real pages for profile, selected work, and contact
 - Homepage identity led by the public-facing name Vivian Wang, with Wang Hanzhi retained for formal context
 - CV-led positioning around finance, data, communication, and execution

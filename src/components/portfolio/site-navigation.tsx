@@ -20,25 +20,36 @@ interface SiteNavigationProps {
 }
 
 const navigationItems = [
-  { href: "/solutions", label: "Work", page: "solutions" },
-  { href: "/contact", label: "Contact", page: "contact" },
+  { id: "about", label: "About" },
+  { id: "education", label: "Education" },
+  { id: "experience", label: "Experience" },
+  { id: "research", label: "Research" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
 ] as const;
 
 export function SiteNavigation({ activePage }: SiteNavigationProps) {
+  function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    if (activePage !== "home") return;
+    event.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-14 border-b border-transparent bg-background/95 backdrop-blur-[2px]">
       <div className="flex h-full w-full items-center justify-between px-5 sm:px-7 lg:px-8">
         <Link
           href="/"
           className={cn(
-            "text-[20px] leading-none tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55",
+            "shrink-0 text-[20px] leading-none tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55",
             activePage === "home" && "font-bold",
           )}
         >
-          Wang Hanzhi
+          Vivian Wang
         </Link>
 
-        <nav className="hidden items-center gap-7 text-[20px] leading-none md:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-4 text-[14px] leading-none lg:flex xl:gap-7 xl:text-[16px]" aria-label="Primary navigation">
           {activePage !== "home" ? (
             <Link href="/" className="portfolio-home-spot" aria-label="Return to the profile page">
               <span aria-hidden="true" />
@@ -50,19 +61,17 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
           )}
           {navigationItems.map((item) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "transition-opacity duration-200 hover:opacity-55",
-                activePage === item.page && "font-bold",
-              )}
+              key={item.id}
+              href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
+              onClick={(event) => scrollToSection(event, item.id)}
+              className="transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
             >
               {item.label}
             </Link>
           ))}
         </nav>
 
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger
               render={
@@ -73,23 +82,18 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
             </SheetTrigger>
             <SheetContent side="right" className="w-[84%] border-l bg-background p-0 shadow-none">
               <SheetHeader className="border-b px-7 py-6 text-left">
-                <SheetTitle className="font-heading text-xl font-bold">Wang Hanzhi</SheetTitle>
-                <SheetDescription>Finance, data, and project work</SheetDescription>
+                <SheetTitle className="font-heading text-xl font-bold">Vivian Wang</SheetTitle>
+                <SheetDescription>Portfolio sections</SheetDescription>
               </SheetHeader>
               <nav className="flex flex-col px-7 py-8" aria-label="Mobile navigation">
-                <SheetClose render={<Link href="/" className="border-b py-5 text-2xl" />}>
-                  Profile
-                </SheetClose>
                 {navigationItems.map((item) => (
                   <SheetClose
-                    key={item.href}
+                    key={item.id}
                     render={
                       <Link
-                        href={item.href}
-                        className={cn(
-                          "border-b py-5 text-2xl",
-                          activePage === item.page && "font-bold",
-                        )}
+                        href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
+                        onClick={(event) => scrollToSection(event, item.id)}
+                        className="border-b py-3 text-xl focus-visible:outline-2 focus-visible:outline-primary"
                       />
                     }
                   >

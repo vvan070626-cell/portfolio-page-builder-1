@@ -1,81 +1,140 @@
-import { IllustratedHero } from "@/components/portfolio/illustrated-hero";
-import { PageTransitionLink } from "@/components/portfolio/page-transition-link";
-import { SiteFooter } from "@/components/portfolio/site-footer";
 import { SiteNavigation } from "@/components/portfolio/site-navigation";
+import { ResumeReveal } from "@/components/portfolio/resume-reveal";
 
-const strengths = [
+const experiences = [
   {
-    eyebrow: "Finance",
-    title: "Evidence before opinion",
-    body: "I turn market structure, operating data, and financial logic into recommendations that can be tested and explained.",
+    title: "CHINESE MEDICINE CLUB | President | Sep 2022 - Jun 2023",
+    points: [
+      "Earned the Model Club Prize for outstanding club leadership and impact.",
+      "Produced two flagship events (herbal education & tasting week; essential-oil workshop), attracting 200+ visitors.",
+      "Coordinated with campus venue administration; drafted event proposals and mobilized members for on-site setup.",
+    ],
   },
   {
-    eyebrow: "Data",
-    title: "Tools for real decisions",
-    body: "My case work connects graph analysis, NLP, mobility data, and practical business assumptions rather than treating technology as decoration.",
+    title: "ENTREPRENEURIAL FINANCE SEMINAR | Group Leader",
+    points: [
+      "Delivered by Prof. Shai Bernstein from Harvard Business School.",
+      "Co-authored NFTz report and delivered team presentation.",
+      "Applied POCD to assess market, rivals, and growth strategy with qual/quant evaluation.",
+    ],
   },
   {
-    eyebrow: "Execution",
-    title: "Ideas carried through",
-    body: "From a 400-person event budget to a 5,000-member community, I’m comfortable owning details after the strategy is agreed.",
+    title: "SOCIAL MEDIA MANAGEMENT | Group Organizer",
+    points: [
+      "Identified an unmet eye-care niche and launched a Douban community (5,000+ members).",
+      "Published eye-health content, including screen-break challenges and science-based tips.",
+    ],
+  },
+  {
+    title: "PROM FINANCE LEAD | Finance Lead",
+    points: [
+      "Finance lead for 400-person prom; managed end-to-end budgeting.",
+      "Processed payments, procurement, and reconciliation across ~200k spend.",
+      "Wrote sponsorship pitch; secured HSBC and ABC in-kind support.",
+    ],
   },
 ];
 
-const proofPoints = [
-  { value: "Semi-finalist", label: "HKSI Institute Case Competition 2026" },
-  { value: "HK$18.88M", label: "Projected additional NOI in the REIT case" },
-  { value: "5,000+", label: "Members in a niche eye-care community" },
-  { value: "~200k", label: "Prom spend managed and reconciled" },
+const projects = [
+  {
+    title: "HKSI INSTITUTE CASE COMPETITION 2026 | Semi-Finalist",
+    lines: [
+      "Innovative AI Application in REIT Asset Management:",
+      "Adopted by Champion REIT. Based on spatial network, economic/policy, and population mobility data.",
+      "Intelligent acquisition uses graph/NLP/mobile; building ops saves HK$1.41M; tenant mgmt adds HK$18.88M NOI.",
+    ],
+  },
+  {
+    title: "Tokenized FoF Smart Allocation Platform for Elderly Care | Feb 2026 - Mar 2026",
+    lines: [
+      "Monetize from AUM fee, 5% fulfillment commission, product issuance fee and anonymized data.",
+      "Closed-loop ecosystem integrating physical assets, service rights, and community incentives.",
+      "Data based on real market pricing and allocation.",
+    ],
+  },
 ];
 
 export function HomePortfolioPage() {
   return (
     <div className="portfolio-page page-enter">
       <SiteNavigation activePage="home" />
-      <main>
-        <div className="portfolio-content-shell">
-          <IllustratedHero
-            title="Vivian Wang"
-            titleLines={["Vivian", "Wang"]}
-            subtitle="Vivian Wang (Wang Hanzhi) — business and management student at HKUST, building analytical ideas into decisions, presentations, and projects."
-            illustration="/illustration-working.webp"
-            illustrationAlt="Black line illustration of Wang Hanzhi working at a laptop"
-          />
+      <main className="portfolio-content-shell pb-24">
+        <section id="about" aria-labelledby="page-title" className="flex min-h-[min(44rem,calc(100svh-3.5rem))] scroll-mt-24 flex-col justify-center border-b border-border py-16 sm:py-24">
+          <h1 id="page-title" className="font-heading text-[clamp(3.5rem,10vw,7.5rem)] font-black leading-[0.98] tracking-[-0.065em]">
+            Vivian Wang
+          </h1>
+          <p className="mt-7 max-w-[50rem] text-lg leading-relaxed sm:text-2xl">
+            BBA, The Hong Kong University of Science and Technology (Expected June 2029)
+          </p>
+          <a
+            href="/resume.pdf"
+            download="resume.pdf"
+            className="mt-10 w-fit rounded-full border-2 border-primary px-6 py-3 font-bold text-foreground transition-[color,background-color,transform] duration-200 ease-out motion-safe:hover:-translate-y-0.5 hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            Download Resume (PDF)
+          </a>
+        </section>
 
-          <section className="portfolio-capability-grid" aria-label="Core strengths">
-            {strengths.map((strength) => (
-              <article key={strength.eyebrow}>
-                <p className="portfolio-eyebrow">{strength.eyebrow}</p>
-                <h2>{strength.title}</h2>
-                <p>{strength.body}</p>
-              </article>
-            ))}
-          </section>
-
-          <section className="portfolio-proof-strip" aria-label="Selected evidence">
-            {proofPoints.map((point) => (
-              <article key={point.label}>
-                <strong>{point.value}</strong>
-                <span>{point.label}</span>
-              </article>
-            ))}
-          </section>
-
-          <section className="portfolio-profile-note" aria-labelledby="profile-note-title">
-            <p className="portfolio-eyebrow">Current chapter</p>
-            <h2 id="profile-note-title">Learning in Hong Kong, applying ideas across finance and community projects.</h2>
-            <p>
-              I’m completing a Bachelor in Business and Management at HKUST, with coursework spanning business
-              statistics, accounting, financial management, information systems, and coding for business.
-            </p>
-          </section>
-
-          <div className="portfolio-home-action">
-            <PageTransitionLink href="/solutions" label="See the evidence" />
+        <ResumeReveal id="education" title="Education">
+          <div className="border-l-[3px] border-primary py-2 pl-6 sm:pl-9">
+            <h3 className="font-heading text-xl font-bold leading-snug sm:text-2xl">The Hong Kong University of Science and Technology</h3>
+            <p className="mt-2 text-lg">BBA (Expected June 2029)</p>
+            <p className="mt-5 leading-relaxed text-muted-foreground">Introduction to Information System, Academic English for Business Studies</p>
           </div>
-        </div>
+        </ResumeReveal>
+
+        <ResumeReveal id="experience" title="Experience">
+          <div className="space-y-0">
+            {experiences.map((experience) => (
+              <article key={experience.title} className="border-t border-border py-8 first:border-t-0 first:pt-0">
+                <div className="min-w-0 max-w-[52rem]">
+                  <h3 className="font-heading text-lg font-bold leading-snug sm:text-xl">{experience.title}</h3>
+                  <ul className="mt-5 list-disc space-y-2 pl-5 marker:text-primary">
+                    {experience.points.map((point) => <li key={point} className="pl-1 leading-relaxed">{point}</li>)}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
+        </ResumeReveal>
+
+        <ResumeReveal id="research" title="Research & Projects">
+          <div className="grid gap-5 md:grid-cols-2">
+            {projects.map((project) => (
+              <article key={project.title} className="flex min-w-0 flex-col border border-border bg-card p-6 transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-primary hover:shadow-lg sm:p-8">
+                <h3 className="font-heading text-xl font-bold leading-snug">{project.title}</h3>
+                <div className="mt-7 space-y-4 border-t border-border pt-6 leading-relaxed">
+                  {project.lines.map((line) => <p key={line}>{line}</p>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </ResumeReveal>
+
+        <ResumeReveal id="skills" title="Skills">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="min-w-0 border-t border-border pt-5">
+              <p className="inline-block max-w-full rounded-full bg-muted px-5 py-3 leading-relaxed">Languages: Fluent in Mandarin, English. Familiar with Cantonese.</p>
+            </div>
+            <div className="min-w-0 border-t border-border pt-5">
+              <p className="inline-block max-w-full rounded-full bg-muted px-5 py-3 leading-relaxed">Tools: Python / Vibe coding / Microsoft Office</p>
+            </div>
+          </div>
+        </ResumeReveal>
+
+        <ResumeReveal id="contact" title="Contact">
+          <div className="grid gap-10 sm:grid-cols-2">
+            <div>
+              <h3 className="font-heading text-lg font-bold">Email</h3>
+              <a className="mt-3 inline-block break-all text-lg underline decoration-primary underline-offset-4 transition-opacity hover:opacity-60" href="mailto:hzwang@connect.ust.hk">hzwang@connect.ust.hk</a>
+            </div>
+            <div>
+              <h3 className="font-heading text-lg font-bold">LinkedIn</h3>
+              <a className="mt-3 inline-block break-all text-lg underline decoration-primary underline-offset-4 transition-opacity hover:opacity-60" href="https://www.linkedin.com/in/hanzhi-w-b33780439" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/hanzhi-w-b33780439</a>
+            </div>
+          </div>
+        </ResumeReveal>
       </main>
-      <SiteFooter />
     </div>
   );
 }
