@@ -5,6 +5,8 @@ interface IllustratedHeroProps {
   subtitle: string;
   illustration: string;
   illustrationAlt: string;
+  children?: React.ReactNode;
+  id?: string;
   titleAccent?: boolean;
   titleLines?: string[];
 }
@@ -14,14 +16,16 @@ export function IllustratedHero({
   subtitle,
   illustration,
   illustrationAlt,
+  children,
+  id,
   titleAccent = false,
   titleLines,
 }: IllustratedHeroProps) {
   return (
-    <section className="portfolio-hero" aria-labelledby="page-title">
+    <section id={id} className="portfolio-hero scroll-mt-20" aria-labelledby="page-title">
       <div className="portfolio-hero-copy">
         {titleLines ? (
-          <h1 id="page-title" className="portfolio-home-title">
+          <h1 id="page-title" aria-label={title} className="portfolio-home-title">
             {titleLines.map((line) => (
               <span key={line}>{line}</span>
             ))}
@@ -33,6 +37,7 @@ export function IllustratedHero({
           </h1>
         )}
         <p className="portfolio-kicker">{subtitle}</p>
+        {children}
       </div>
       <div className="portfolio-illustration-frame">
         <Image

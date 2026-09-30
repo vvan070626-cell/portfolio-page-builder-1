@@ -28,6 +28,11 @@ const navigationItems = [
   { id: "contact", label: "Contact" },
 ] as const;
 
+const pageNavigationItems = [
+  { href: "/solutions", label: "Work", page: "solutions" },
+  { href: "/contact", label: "Contact", page: "contact" },
+] as const;
+
 export function SiteNavigation({ activePage }: SiteNavigationProps) {
   function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
     if (activePage !== "home") return;
@@ -49,16 +54,7 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
           Vivian Wang
         </Link>
 
-        <nav className="hidden items-center gap-4 text-[14px] leading-none lg:flex xl:gap-7 xl:text-[16px]" aria-label="Primary navigation">
-          {activePage !== "home" ? (
-            <Link href="/" className="portfolio-home-spot" aria-label="Return to the profile page">
-              <span aria-hidden="true" />
-            </Link>
-          ) : (
-            <span className="portfolio-home-spot portfolio-home-spot-static" aria-hidden="true">
-              <span />
-            </span>
-          )}
+        <nav className="hidden items-center gap-3 text-[13px] leading-none lg:flex xl:gap-5 xl:text-[16px]" aria-label="Primary navigation">
           {navigationItems.map((item) => (
             <Link
               key={item.id}
@@ -69,6 +65,27 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
               {item.label}
             </Link>
           ))}
+          <div className="ml-1 flex items-center gap-3 border-l border-border pl-4 xl:gap-5" aria-label="Portfolio pages">
+            {activePage !== "home" ? (
+              <Link href="/" className="portfolio-home-spot" aria-label="Return to the profile page">
+                <span aria-hidden="true" />
+              </Link>
+            ) : (
+              <span className="portfolio-home-spot portfolio-home-spot-static" aria-hidden="true">
+                <span />
+              </span>
+            )}
+            {pageNavigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-label={`${item.label} page`}
+                className={cn("transition-opacity duration-200 hover:opacity-55", activePage === item.page && "font-bold")}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </nav>
 
         <div className="lg:hidden">
@@ -80,7 +97,7 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
             >
               <Menu size={22} strokeWidth={1.8} />
             </SheetTrigger>
-            <SheetContent side="right" className="w-[84%] border-l bg-background p-0 shadow-none">
+            <SheetContent side="right" className="w-[84%] overflow-y-auto border-l bg-background p-0 shadow-none">
               <SheetHeader className="border-b px-7 py-6 text-left">
                 <SheetTitle className="font-heading text-xl font-bold">Vivian Wang</SheetTitle>
                 <SheetDescription>Portfolio sections</SheetDescription>
@@ -100,6 +117,19 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
                     {item.label}
                   </SheetClose>
                 ))}
+                <div className="mt-5 border-t border-border pt-5" aria-label="Portfolio pages">
+                  <SheetClose render={<Link href="/" className="block border-b py-3 text-xl" />}>
+                    Profile
+                  </SheetClose>
+                  {pageNavigationItems.map((item) => (
+                    <SheetClose
+                      key={item.href}
+                      render={<Link href={item.href} className={cn("block border-b py-3 text-xl", activePage === item.page && "font-bold")} />}
+                    >
+                      {item.label}
+                    </SheetClose>
+                  ))}
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

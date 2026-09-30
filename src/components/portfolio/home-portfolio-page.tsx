@@ -1,3 +1,6 @@
+import { IllustratedHero } from "@/components/portfolio/illustrated-hero";
+import { PageTransitionLink } from "@/components/portfolio/page-transition-link";
+import { SiteFooter } from "@/components/portfolio/site-footer";
 import { SiteNavigation } from "@/components/portfolio/site-navigation";
 import { ResumeReveal } from "@/components/portfolio/resume-reveal";
 
@@ -59,21 +62,24 @@ export function HomePortfolioPage() {
     <div className="portfolio-page page-enter">
       <SiteNavigation activePage="home" />
       <main className="portfolio-content-shell pb-24">
-        <section id="about" aria-labelledby="page-title" className="flex min-h-[min(44rem,calc(100svh-3.5rem))] scroll-mt-24 flex-col justify-center border-b border-border py-16 sm:py-24">
-          <h1 id="page-title" className="font-heading text-[clamp(3.5rem,10vw,7.5rem)] font-black leading-[0.98] tracking-[-0.065em]">
-            Vivian Wang
-          </h1>
-          <p className="mt-7 max-w-[50rem] text-lg leading-relaxed sm:text-2xl">
-            BBA, The Hong Kong University of Science and Technology (Expected June 2029)
-          </p>
-          <a
-            href="/resume.pdf"
-            download="resume.pdf"
-            className="mt-10 w-fit rounded-full border-2 border-primary px-6 py-3 font-bold text-foreground transition-[color,background-color,transform] duration-200 ease-out motion-safe:hover:-translate-y-0.5 hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        <div className="min-h-[min(44rem,calc(100svh-3.5rem))] border-b border-border py-10 sm:py-16">
+          <IllustratedHero
+            id="about"
+            title="Vivian Wang"
+            titleLines={["Vivian", "Wang"]}
+            subtitle="BBA, The Hong Kong University of Science and Technology (Expected June 2029)"
+            illustration="/illustration-working.webp"
+            illustrationAlt="Black line illustration of Wang Hanzhi working at a laptop"
           >
-            Download Resume (PDF)
-          </a>
-        </section>
+            <a
+              href="/resume.pdf"
+              download="resume.pdf"
+              className="mt-10 inline-block rounded-full border-2 border-primary px-6 py-3 font-bold text-foreground transition-[color,background-color,transform] duration-200 ease-out motion-safe:hover:-translate-y-0.5 hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+            >
+              Download Resume (PDF)
+            </a>
+          </IllustratedHero>
+        </div>
 
         <ResumeReveal id="education" title="Education">
           <div className="border-l-[3px] border-primary py-2 pl-6 sm:pl-9">
@@ -134,7 +140,11 @@ export function HomePortfolioPage() {
             </div>
           </div>
         </ResumeReveal>
+        <div className="portfolio-home-action">
+          <PageTransitionLink href="/solutions" label="See the evidence" />
+        </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }
