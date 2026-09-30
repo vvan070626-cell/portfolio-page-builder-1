@@ -1,18 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 interface SiteNavigationProps {
@@ -28,11 +16,6 @@ const navigationItems = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-const pageNavigationItems = [
-  { href: "/solutions", label: "Work", page: "solutions" },
-  { href: "/contact", label: "Contact", page: "contact" },
-] as const;
-
 export function SiteNavigation({ activePage }: SiteNavigationProps) {
   function scrollToSection(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
     if (activePage !== "home") return;
@@ -42,30 +25,19 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 h-14 border-b border-transparent bg-background/95 backdrop-blur-[2px]">
-      <div className="flex h-full w-full items-center justify-between px-5 sm:px-7 lg:px-8">
-        <Link
-          href="/"
-          className={cn(
-            "shrink-0 text-[20px] leading-none tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55",
-            activePage === "home" && "font-bold",
-          )}
-        >
-          Vivian Wang
-        </Link>
-
-        <nav className="hidden items-center gap-3 text-[13px] leading-none lg:flex xl:gap-5 xl:text-[16px]" aria-label="Primary navigation">
-          {navigationItems.map((item) => (
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 h-24 border-b border-border bg-background/95 backdrop-blur-[2px] lg:h-14">
+        <div className="flex h-full w-full flex-col justify-center gap-1 px-4 sm:px-7 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="flex items-center justify-between gap-2 lg:justify-start">
             <Link
-              key={item.id}
-              href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
-              onClick={(event) => scrollToSection(event, item.id)}
-              className="transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              href="/"
+              className={cn(
+                "shrink-0 text-[18px] leading-none tracking-[-0.02em] transition-opacity duration-200 hover:opacity-55 lg:text-[20px]",
+                activePage === "home" && "font-bold",
+              )}
             >
-              {item.label}
+              Vivian Wang
             </Link>
-          ))}
-          <div className="ml-1 flex items-center gap-3 border-l border-border pl-4 xl:gap-5" aria-label="Portfolio pages">
             {activePage !== "home" ? (
               <Link href="/" className="portfolio-home-spot" aria-label="Return to the profile page">
                 <span aria-hidden="true" />
@@ -75,66 +47,23 @@ export function SiteNavigation({ activePage }: SiteNavigationProps) {
                 <span />
               </span>
             )}
-            {pageNavigationItems.map((item) => (
+          </div>
+
+          <nav className="grid w-full grid-cols-3 gap-x-2 gap-y-1 text-center text-[13px] leading-none lg:flex lg:w-auto lg:items-center lg:gap-4 lg:text-[14px] xl:gap-7 xl:text-[16px]" aria-label="Primary navigation">
+            {navigationItems.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
-                aria-label={`${item.label} page`}
-                className={cn("transition-opacity duration-200 hover:opacity-55", activePage === item.page && "font-bold")}
+                key={item.id}
+                href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
+                onClick={(event) => scrollToSection(event, item.id)}
+                className="py-1 transition-opacity duration-200 hover:opacity-55 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
               >
                 {item.label}
               </Link>
             ))}
-          </div>
-        </nav>
-
-        <div className="lg:hidden">
-          <Sheet>
-            <SheetTrigger
-              render={
-                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open navigation" />
-              }
-            >
-              <Menu size={22} strokeWidth={1.8} />
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[84%] overflow-y-auto border-l bg-background p-0 shadow-none">
-              <SheetHeader className="border-b px-7 py-6 text-left">
-                <SheetTitle className="font-heading text-xl font-bold">Vivian Wang</SheetTitle>
-                <SheetDescription>Portfolio sections</SheetDescription>
-              </SheetHeader>
-              <nav className="flex flex-col px-7 py-8" aria-label="Mobile navigation">
-                {navigationItems.map((item) => (
-                  <SheetClose
-                    key={item.id}
-                    render={
-                      <Link
-                        href={activePage === "home" ? `#${item.id}` : `/#${item.id}`}
-                        onClick={(event) => scrollToSection(event, item.id)}
-                        className="border-b py-3 text-xl focus-visible:outline-2 focus-visible:outline-primary"
-                      />
-                    }
-                  >
-                    {item.label}
-                  </SheetClose>
-                ))}
-                <div className="mt-5 border-t border-border pt-5" aria-label="Portfolio pages">
-                  <SheetClose render={<Link href="/" className="block border-b py-3 text-xl" />}>
-                    Profile
-                  </SheetClose>
-                  {pageNavigationItems.map((item) => (
-                    <SheetClose
-                      key={item.href}
-                      render={<Link href={item.href} className={cn("block border-b py-3 text-xl", activePage === item.page && "font-bold")} />}
-                    >
-                      {item.label}
-                    </SheetClose>
-                  ))}
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          </nav>
         </div>
-      </div>
-    </header>
+      </header>
+      <div className="h-10 lg:hidden" aria-hidden="true" />
+    </>
   );
 }

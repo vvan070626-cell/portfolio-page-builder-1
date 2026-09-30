@@ -22,7 +22,7 @@ export function IllustratedHero({
   titleLines,
 }: IllustratedHeroProps) {
   return (
-    <section id={id} className="portfolio-hero scroll-mt-20" aria-labelledby="page-title">
+    <section id={id} className="portfolio-hero scroll-mt-28 lg:scroll-mt-20" aria-labelledby="page-title">
       <div className="portfolio-hero-copy">
         {titleLines ? (
           <h1 id="page-title" aria-label={title} className="portfolio-home-title">

@@ -9,15 +9,13 @@ const experiences = [
     title: "CHINESE MEDICINE CLUB | President | Sep 2022 - Jun 2023",
     points: [
       "Earned the Model Club Prize for outstanding club leadership and impact.",
-      "Produced two flagship events (herbal education & tasting week; essential-oil workshop), attracting 200+ visitors.",
-      "Coordinated with campus venue administration; drafted event proposals and mobilized members for on-site setup.",
+      "Produced two flagship events, attracting 200+ visitors.",
     ],
   },
   {
     title: "ENTREPRENEURIAL FINANCE SEMINAR | Group Leader",
     points: [
       "Delivered by Prof. Shai Bernstein from Harvard Business School.",
-      "Co-authored NFTz report and delivered team presentation.",
       "Applied POCD to assess market, rivals, and growth strategy with qual/quant evaluation.",
     ],
   },
@@ -32,7 +30,6 @@ const experiences = [
     title: "PROM FINANCE LEAD | Finance Lead",
     points: [
       "Finance lead for 400-person prom; managed end-to-end budgeting.",
-      "Processed payments, procurement, and reconciliation across ~200k spend.",
       "Wrote sponsorship pitch; secured HSBC and ABC in-kind support.",
     ],
   },
@@ -41,19 +38,11 @@ const experiences = [
 const projects = [
   {
     title: "HKSI INSTITUTE CASE COMPETITION 2026 | Semi-Finalist",
-    lines: [
-      "Innovative AI Application in REIT Asset Management:",
-      "Adopted by Champion REIT. Based on spatial network, economic/policy, and population mobility data.",
-      "Intelligent acquisition uses graph/NLP/mobile; building ops saves HK$1.41M; tenant mgmt adds HK$18.88M NOI.",
-    ],
+    description: "Adopted by Champion REIT. Building ops saves HK$1.41M; tenant mgmt adds HK$18.88M NOI.",
   },
   {
     title: "Tokenized FoF Smart Allocation Platform for Elderly Care | Feb 2026 - Mar 2026",
-    lines: [
-      "Monetize from AUM fee, 5% fulfillment commission, product issuance fee and anonymized data.",
-      "Closed-loop ecosystem integrating physical assets, service rights, and community incentives.",
-      "Data based on real market pricing and allocation.",
-    ],
+    description: "Monetize from AUM fee, 5% fulfillment commission, and anonymized data.",
   },
 ];
 
@@ -92,10 +81,10 @@ export function HomePortfolioPage() {
         <ResumeReveal id="experience" title="Experience">
           <div className="space-y-0">
             {experiences.map((experience) => (
-              <article key={experience.title} className="border-t border-border py-8 first:border-t-0 first:pt-0">
+              <article key={experience.title} className="border-t border-border py-10 first:border-t-0 first:pt-0 sm:py-12">
                 <div className="min-w-0 max-w-[52rem]">
                   <h3 className="font-heading text-lg font-bold leading-snug sm:text-xl">{experience.title}</h3>
-                  <ul className="mt-5 list-disc space-y-2 pl-5 marker:text-primary">
+                  <ul className="mt-6 list-disc space-y-3 pl-5 marker:text-primary">
                     {experience.points.map((point) => <li key={point} className="pl-1 leading-relaxed">{point}</li>)}
                   </ul>
                 </div>
@@ -105,13 +94,11 @@ export function HomePortfolioPage() {
         </ResumeReveal>
 
         <ResumeReveal id="research" title="Research & Projects">
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-7 md:grid-cols-2">
             {projects.map((project) => (
-              <article key={project.title} className="flex min-w-0 flex-col border border-border bg-card p-6 transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-primary hover:shadow-lg sm:p-8">
+              <article key={project.title} className="flex min-w-0 flex-col border border-border bg-card p-8 transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-primary hover:shadow-lg sm:p-10">
                 <h3 className="font-heading text-xl font-bold leading-snug">{project.title}</h3>
-                <div className="mt-7 space-y-4 border-t border-border pt-6 leading-relaxed">
-                  {project.lines.map((line) => <p key={line}>{line}</p>)}
-                </div>
+                <p className="mt-7 border-t border-border pt-6 leading-relaxed">{project.description}</p>
               </article>
             ))}
           </div>
